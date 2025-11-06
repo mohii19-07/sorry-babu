@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sorry Babbu 💛</title>
+
+<style>
+  :root {
+    --yellow: #ffe75c;
+    --pink: #ffd6e8;
+    --accent: #ff9f1c;
+  }
+  body {
+    margin: 0;
+    background: var(--yellow);
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+  .wrap {
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    text-align: center;
+  }
+  .box {
+    display: none;
+    background: var(--pink);
+    padding: 18px 20px;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    font-weight: 600;
+    line-height: 1.5;
+    width: 100%;
+  }
+  #box1 { display: block; }
+
+  .btn {
+    border: 0;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 800;
+    padding: 12px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    box-shadow: 0 8px 18px rgba(255,159,28,0.35);
+  }
+
+  .floating {
+    position: absolute;
+    font-size: 24px;
+    pointer-events: none;
+    animation: float 4.8s ease-in-out infinite;
+    opacity: 0.9;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-24px) rotate(8deg); }
+    100% { transform: translateY(0) rotate(0); }
+  }
+
+  .photo-card {
+    display: none;
+    background: white;
+    border-radius: 22px;
+    padding: 12px 12px 18px;
+    box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+    width: min(92vw, 520px);
+    margin-top: 6px;
+  }
+  .photo-card img {
+    width: 100%;
+    border-radius: 18px;
+  }
+
+  .lyric {
+    margin-top: 10px;
+    font-weight: 800;
+    font-size: 18px;
+  }
+
+  /* Option B: soft blink fade */
+  .blink-out {
+    animation: blinkFade 1.6s ease forwards;
+  }
+  @keyframes blinkFade {
+    0% { opacity: 1; filter: blur(0px); }
+    50% { opacity: 0.35; filter: blur(1px); transform: scaleY(0.98); }
+    100% { opacity: 0; filter: blur(2px); transform: scaleY(0.96); }
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <div class="box" id="box1"></div>
+
+  <button class="btn" id="nextBtn" style="display:none">
+    Want to know more what Mohit wants to sayyy!!??
+  </button>
+
+  <div class="box" id="box2"></div>
+
+  <!-- PHOTO + LYRIC + AUDIO -->
+  <div class="photo-card" id="photoCard">
+      <img id="thePhoto" src="DATA-URL-PHOTO-HERE" />
+      <div class="lyric" id="lyric"></div>
+
+      <audio id="sahibaAudio" preload="auto" src="DATA-URL-MP3-HERE"></audio>
+  </div>
+
+  <div class="box" id="finalBox"></div>
+
+</div>
+
+<script>
+
+// FLOATING EMOJIS 🤧 😭
+const floaters = ["🤧", "😭"];
+for (let i=0; i<26; i++) {
+  const d = document.createElement("div");
+  d.className = "floating";
+  d.textContent = floaters[Math.floor(Math.random()*floaters.length)];
+  d.style.left = Math.random()*100 + "%";
+  d.style.top = Math.random()*100 + "%";
+  d.style.animationDuration = (3+Math.random()*4)+"s";
+  d.style.fontSize = (18+Math.random()*16)+"px";
+  document.body.appendChild(d);
+}
+
+// TYPING FUNCTIONS
+function typeText(el, text, speed=40, done){
+  el.innerHTML = "";
+  let i=0;
+  function step(){
+    if(i < text.length){
+      el.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(step, speed);
+    } else {
+      if(done) done();
+    }
+  }
+  step();
+}
+
+function typeLines(el, lines, speed=40, gap=600, done){
+  let i=0;
+  function next(){
+    if(i >= lines.length){
+      if(done) done();
+      return;
+    }
+    typeText(el, lines[i], speed, ()=>{ i++; setTimeout(next, gap); });
+  }
+  next();
+}
+
+// APOLOGY TEXTS
+const s1 = [
+  "I AM SORRYYY BABBUUU 😭🤧, REALYY SORRYYY SORRRYYY I was just telling you to just make you know",
+  "I am sorryyy babbuu I onlyy Loveeeeeee Youuuuuuuu taniii babbyyyy I am so sorryyy dear please try to understand me, You were myy CRUSH, You are myy CRUSH, You will be myy CRUSH",
+  "I AM SORRYYY BABUUU",
+  "Literally saying this I was just telling just to make you know",
+  "I am sorryyy 🤧"
+];
+
+const s2 = [
+  "SORRYYY BABBYYYY REALLY VERYYY SORRYYY",
+  "PLEASE TAKL WITH ME",
+  "CONTROL ME, ORDER ME, PUNISH ME, RESTRICT ME, SHOW YOUR RIGHTS DO ANYTHING JUSSS DON'T STOP TALK LIKE STARNGER 😭🤧",
+  "I ALWAYS LOVEEEEEE YOUUUU BAABYYY"
+];
+
+const lyricLines = [
+  "SAHIBA TU HI MERA AAYINA ,",
+  "HATHON MEIN BHI MERE HAAN,",
+  "TERA HI NASEEB AATA HAI"
+];
+
+const finalMsg =
+  "PLEASEE BABYYY PLEASEE, I would not speak with any girl which you will tell. 'YOU ARE MYY PRIORITYY BABUUUU' SORRYYY BABYYYYY 🥺🥺🥺<br><br>" +
+  "LOVEEEEE YOUUUU BABYYYY AND SORRYYY 🥺🥺😭<br>IF YOU WON'T UNDERSTAND ME THEN WHO WILL 🤧🥺";
+
+// ELEMENTS
+const box1 = document.getElementById("box1");
+const box2 = document.getElementById("box2");
+const finalBox = document.getElementById("finalBox");
+const nextBtn = document.getElementById("nextBtn");
+const photoCard = document.getElementById("photoCard");
+const lyricEl = document.getElementById("lyric");
+const audio = document.getElementById("sahibaAudio");
+
+// START TYPING
+typeLines(box1, s1, 38, 600, ()=>{ nextBtn.style.display="inline-block"; });
+
+nextBtn.addEventListener("click", ()=>{
+  nextBtn.style.display="none";
+  box2.style.display="block";
+
+  typeLines(box2, s2, 38, 600, ()=>{
+
+    // PHOTO & LYRIC SCENE
+    photoCard.style.display = "block";
+
+    // Start audio
+    audio.currentTime = 0;
+    audio.play().catch(()=>{});
+
+    // Type each lyric line
+    let i=0;
+    function nextLyric(){
+      if(i >= lyricLines.length){
+        // After last line → blink-out
+        photoCard.classList.add("blink-out");
+
+        setTimeout(()=>{
+          photoCard.style.display="none";
+          finalBox.style.display="block";
+          typeText(finalBox, finalMsg, 34);
+        }, 1650);
+
+        return;
+      }
+      typeText(lyricEl, lyricLines[i], 46, ()=>{
+        i++;
+        setTimeout(nextLyric, 550);
+      });
+    }
+    nextLyric();
+
+  });
+});
+
+</script>
+</body>
+</html>
