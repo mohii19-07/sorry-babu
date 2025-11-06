@@ -154,7 +154,7 @@ function typeText(el, text, speed=40, done){
   step();
 }
 
-function typeLines(el, lines, speed=40, gap=600, done){
+function typeLines(el, lines, speed=90, gap=1200, done){
   let i=0;
   function next(){
     if(i >= lines.length){
@@ -202,13 +202,13 @@ const lyricEl = document.getElementById("lyric");
 const audio = document.getElementById("sahibaAudio");
 
 // START TYPING
-typeLines(box1, s1, 38, 600, ()=>{ nextBtn.style.display="inline-block"; });
+typeLines(box1, s1, 40, 1200, ()=>{ nextBtn.style.display="inline-block"; });
 
 nextBtn.addEventListener("click", ()=>{
   nextBtn.style.display="none";
   box2.style.display="block";
 
-  typeLines(box2, s2, 38, 600, ()=>{
+  typeLines(box2, s2, 40, 1200, ()=>{
 
     // PHOTO & LYRIC SCENE
     photoCard.style.display = "block";
@@ -232,7 +232,7 @@ nextBtn.addEventListener("click", ()=>{
 
         return;
       }
-      typeText(lyricEl, lyricLines[i], 46, ()=>{
+      typeText(lyricEl, lyricLines[i], 100, ()=>{
         i++;
         setTimeout(nextLyric, 550);
       });
